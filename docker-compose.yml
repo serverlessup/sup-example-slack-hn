@@ -1,0 +1,22 @@
+version: '2'
+services:
+  db:
+    image: couchdb:latest    
+    ports:
+      - "35984:5984"
+  web:
+    build:
+      context: ./
+      dockerfile: ./docker-compose.web.Dockerfile
+    volumes:
+      - ./functions:/usr/sst_functions
+      - ./params:/usr/sst_params
+      - ./test:/usr/src
+    environment:
+      - SST_FUNCTIONS_HOME=/usr/sst_functions
+      - SST_PARAMS_HOME=/usr/sst_params
+    entrypoint: /usr/src/startup.sh
+    ports:
+      - "33000:3000"
+    depends_on:
+      - db

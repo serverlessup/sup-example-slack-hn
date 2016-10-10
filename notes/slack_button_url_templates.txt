@@ -1,0 +1,8 @@
+Lambda
+https://slack.com/oauth/authorize?scope=incoming-webhook,commands&client_id=YOUR_SLACK_CLIENT_ID&redirect_uri=YOUR_SLACK_AUTH_API_GATEWAY_URL_ENCODED
+
+OpenWhisk
+https://slack.com/oauth/authorize?scope=incoming-webhook,commands&client_id=YOUR_SLACK_CLIENT_ID&redirect_uri=YOUR_SLACK_AUTH_API_CONNECT_URL_ENCODED
+
+Test
+https://slack.com/oauth/authorize?scope=incoming-webhook,commands&client_id=YOUR_SLACK_CLIENT_ID&redirect_uri=http%3A%2F%2Flocalhost%3A33000%2Fauth%2Fslack

@@ -1,0 +1,11 @@
+{
+  "name": "serverless-slack-testing",
+  "version": "0.0.1",
+  "description": "",
+  "author": "Mark Watson <markwatsonatx@gmail.com>",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.13.3"
+  }
+}
