@@ -66,6 +66,8 @@ touch $func_json_file_name
 if [ $param_first = false ]
 then
 	echo $param_json > $func_json_file_name
+else
+	echo '{}' > $func_json_file_name
 fi
 # zip up js and json
 func_zip_file_name=$(echo $func_tmp_file_dir'/deployment.zip')

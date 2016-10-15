@@ -1,0 +1,2 @@
+Lambda role must have the following policies: AWSLambdaExecute, AWSLambdaBasicExecutionRole, AWSLambdaRole
+HNSlackCommandHN must have a timeout of 10 seconds+
