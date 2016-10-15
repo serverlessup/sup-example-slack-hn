@@ -1,5 +1,13 @@
 function main(params) {
-	return run(params);
+	run(params, function(error, response) {
+		if (error) {
+			return whisk.done(error);
+		}
+		else {
+			return whisk.done(response);
+		}
+	});
+	return whisk.async();
 }
 
 {% include "../core/HNSlackCommand.js" %}

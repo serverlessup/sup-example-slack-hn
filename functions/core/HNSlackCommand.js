@@ -12,41 +12,49 @@ function run(params, callback) {
 	}
 }
 
-function getTopStories(params, slackResponsUrl) {
+function getTopStories(params, callback) {
+	var slackCallbackUrl = decodeURIComponent(params.response_url)
+	var response = { "text": "Top 20 Hacker News stories coming right up... (" + slackCallbackUrl + ")" };
+	callback(null, response);
 	getCachedValue(params.serverlessup_host, params.serverlessup_token, 'topstories', (err, statusCode, json) => {
 		if (err || ! json || json.length == 0) {
-			getAndCacheTopStories(params, slackResponsUrl);
+			getAndCacheTopStories(params, callback);
 		}
 		else {
 			slackPost = {
 				text: "Here are the top 20 Hacker News stories:",
 				attachments: JSON.parse(json)
 			};
-			console.log("FROM SUP = " + JSON.stringify(slackPost, null, 2));
+			console.log("Sending to Slack (from kv) @ " + slackCallbackUrl);
+			postToSlack(slackCallbackUrl, slackPost, (err, statusCode) => {
+			});
 		}
 	});
-	return { "text": "Top 20 Hacker News stories coming right up..." };
 }
 
-function getAndCacheTopStories(params, slackResponsUrl) {
+function getAndCacheTopStories(params, callback) {
+	var slackCallbackUrl = decodeURIComponent(params.response_url)
 	getHackerNewsTopStories(20, (err, stories) => {
 		if (err) {
 			console.log("ERROR GETTING STORIES FROM HN")
+			callback(err); // mw:TODO:send to slack
 		}
 		else {
 			slackPost = {
 				text: "Here are the top 20 Hacker News stories:",
 				attachments: stories
 			};
-			console.log("FROM HN = " + JSON.stringify(slackPost, null, 2));
 			saveCachedValue(params.serverlessup_host, params.serverlessup_token, 'topstories', stories, (err, statusCode) => {
 				if (err) {
 					console.log("ERROR SAVING CACHED VALUE: " + err);
+					callback(err); // mw:TODO:send to slack
 				}
 				else {
-					console.log("SAVE CACHED VALUE STATUS CODE = " + statusCode);
+					console.log("Sending to Slack (after saving to kv) @ " + slackCallbackUrl);
+					postToSlack(slackCallbackUrl, slackPost, (err, statusCode) => {
+					});
 				}
-			})
+			});
 		}				
 	});
 }
@@ -66,3 +74,4 @@ function getJobs(params) {
 
 {% include "../lib/HackerNewsAPI.js" %}
 {% include "../lib/ServerlessUpAPI.js" %}
+{% include "../lib/SlackAPI.js" %}

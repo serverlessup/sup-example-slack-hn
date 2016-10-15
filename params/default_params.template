@@ -1,3 +1,4 @@
+serverlessup_host=<SERVERLESSUP_HOST>
 serverlessup_token=<YOUR_SERVERLESSUP_TOKEN>
 slack_client_id=<YOUR_SLACK_APP_CLIENT_ID>
 slack_client_key=<YOUR_SLACK_APP_CLIENT_SECRET>

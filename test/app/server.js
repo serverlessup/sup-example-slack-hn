@@ -7,7 +7,14 @@ var app = express();
 app.use(bodyParser.json())
 
 app.post('/function/:func', function(req, res) {
-    res.send(functionRunner.run(req.params.func, req.body));
+    functionRunner.run(req.params.func, req.body, (error, response) => {
+		if (error) {
+			res.status(500).send();
+		}
+		else {
+			res.status(200).send(response);
+		}
+	});
 });
 
 app.get('/auth/slack', function(req, res) {
@@ -16,7 +23,7 @@ app.get('/auth/slack', function(req, res) {
 		state: req.query.state,
 		error: req.query.error
 	};
-	functionRunner.run('SlackAuth', args, function(error, response) {
+	functionRunner.run('HNSlackAuth', args, (error, response) => {
 		if (error) {
 			res.status(500).send();
 		}

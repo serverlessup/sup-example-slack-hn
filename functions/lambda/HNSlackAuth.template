@@ -1,10 +1,12 @@
 var config = require("./config.json");
 
 exports.handler = (event, context, callback) => {
-    event["slack_client_id"] = config.slack_client_id;
+    event["serverlessup_host"] = config.serverlessup_host;
+	event["serverlessup_token"] = config.serverlessup_token;
+	event["slack_client_id"] = config.slack_client_id;
 	event["slack_client_secret"] = config.slack_client_secret;
 	event["slack_redirect_uri"] = config.slack_redirect_uri;
-    callback(null, run(event));
+    run(event,callback);
 };
 
 {% include "../core/HNSlackAuth.js" %}

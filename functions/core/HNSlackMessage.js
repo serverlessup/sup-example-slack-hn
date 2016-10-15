@@ -1,18 +1,20 @@
-function run(params) {
+function run(params, callback) {
 	var payload = JSON.parse(decodeURIComponent(params.payload));
 	var callbackId = payload.callback_id;
 	var action = payload.actions[0].name;
+	var response;
 	if (callbackId == "xxxx") {
 		if (action == "yyyy") {
-			return { "text": "Thanks! "}
+			response = { "text": "Thanks! "}
 		}
 		else {
-			return { "text": "Thanks! "}
+			response = { "text": "Thanks! "}
 		}
 	}
 	else {
-		return { "text": "Thanks! "}
+		response = { "text": "Thanks! "}
 	}
+	callback(null, response);
 }
 
 function getResponse(params, action) {

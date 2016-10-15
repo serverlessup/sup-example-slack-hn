@@ -1,7 +1,7 @@
 var config = require("./config.json");
 
 exports.handler = (event, context, callback) => {
-    callback(null, run(event));
+    run(event,callback);
 };
 
 {% include "../core/HNSlackMessage.js" %}

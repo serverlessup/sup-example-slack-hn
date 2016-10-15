@@ -75,4 +75,4 @@ func_json_rel_file_name=$(echo $func_json_file_name | sed 's/.*\///')
 aws_cmd=$(echo $aws_cmd --zip-file fileb://$func_zip_file_name)
 # run
 echo $aws_cmd
-#eval $aws_cmd
+eval $aws_cmd

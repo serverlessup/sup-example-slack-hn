@@ -1,3 +1,5 @@
+// $DefaultParam:serverlessup_host
+// $DefaultParam:serverlessup_token
 // $DefaultParam:slack_client_id
 // $DefaultParam:slack_client_secret
 // $DefaultParam:slack_redirect_uri
@@ -26,7 +28,16 @@ function run(params, callback) {
 			});
 			res.on('end', function () {
 				console.log("Slack Response = " + body);
-				callback(null, code, state, body);
+				saveJsonDoc(params.serverlessup_host, params.serverlessup_token, JSON.parse(body), (err, statusCode) => {
+					if (err) {
+						console.log("ERR = " + err);
+						callback(err);
+					}
+					else {
+						console.log("HOLA");
+						callback(null, {code:code, state:state, body:body});
+					}
+				});
 			});
 		}).on('error', (e) => {
 			console.log("Slack Error = " + e);
@@ -34,3 +45,5 @@ function run(params, callback) {
 		});
 	}
 }
+
+{% include "../lib/ServerlessUpAPI.js" %}
