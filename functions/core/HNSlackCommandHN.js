@@ -26,7 +26,7 @@ function getTopStories(params, callback) {
 
 function getAndCacheTopStories(params, callback) {
 	var slackCallbackUrl = decodeURIComponent(params.response_url)
-	getHackerNewsTopStories(20, (err, stories) => {
+	getHackerNewsTopStories(10, (err, stories) => {
 		if (err) {
 			sendErrorToSlack("Sorry, we are having trouble connecting to Hacker News right now!", params, callback);
 		}
@@ -56,7 +56,8 @@ function sendTopStoriesToSlack(stories, params, callback) {
 		else {
 			var response = {
 				"text": "Stories sent to Slack.",
-				"statusCode": statusCode
+				"statusCode": statusCode,
+				"slackPost": slackPost
 			};
 			callback(null, response);
 		}

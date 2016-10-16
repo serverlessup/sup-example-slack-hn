@@ -1,7 +1,5 @@
 function postToSlack(url, value, callback) {
 	var postData = JSON.stringify(value);
-	console.log("POSTING TO SLACK");
-	console.log(postData)
 	var urlObject = require('url').parse(url);
 	var options = {
 		hostname: urlObject.host,

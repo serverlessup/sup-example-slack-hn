@@ -13,10 +13,10 @@ function getHackerNewsTopStories(count, callback) {
 				getStoryCallback = function(err, story) {
 					if (story) {
 						stories.push({
-							title: story.title,
-							title_link: story.url,
-							author: 'Comments',
-							author_link: 'https://news.ycombinator.com/item?id=' + story.id
+							author_name: story.title,
+							author_link: story.url,
+							title: story.score + ' point(s) by ' + story.by + ' X comments',
+							title_link: 'https://news.ycombinator.com/item?id=' + story.id
 						});
 					}
 					i = i + 1;
