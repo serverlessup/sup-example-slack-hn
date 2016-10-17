@@ -1,5 +1,5 @@
 function main(params) {
-	run(params, function(error, response) {
+	run(params, (error, response) => {
 		if (error) {
 			return whisk.done(error);
 		}
@@ -10,4 +10,4 @@ function main(params) {
 	return whisk.async();
 }
 
-{% include "../core/HNSlackCommand.js" %}
+{% include "../core/HNSlackAuth.js" %}

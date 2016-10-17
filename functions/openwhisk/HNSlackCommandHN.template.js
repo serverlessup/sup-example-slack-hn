@@ -1,5 +1,6 @@
 function main(params) {
-	run(params, function(error, response) {
+	console.log("Processing /hn: " + JSON.stringify(params, null, 2));
+	run(params, (error, response) => {
 		if (error) {
 			return whisk.done(error);
 		}
@@ -10,4 +11,4 @@ function main(params) {
 	return whisk.async();
 }
 
-{% include "../core/HNSlackMessage.js" %}
+{% include "../core/HNSlackCommandHN.js" %}
